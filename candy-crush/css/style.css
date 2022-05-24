@@ -1,0 +1,34 @@
+/******************************************
+/* CSS
+/*******************************************/
+
+/* Box Model Hack */
+*{
+  box-sizing: border-box;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+body{
+  background: url(../img/candy-crush-background-2.png);
+}
+.grid {
+  height: 560px;
+  width: 560px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: gray;
+}
+
+.grid div {
+  height: 70px;
+  width: 70px;
+
+}
+
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
