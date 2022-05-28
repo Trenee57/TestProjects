@@ -10,7 +10,7 @@ async function makeReq(){
   document.querySelector(".btnTop").textContent = data.name
   document.querySelector(".btnMid").textContent = data.status
   document.querySelector(".btnB").textContent = data.currentOccupation
-  document.querySelectorAll(".btn").forEach(light => {
-    light.classList.toggle('hidden')
+  document.querySelectorAll(".btn").forEach(active => {
+    active.classList.remove('hidden')
 })
 };
