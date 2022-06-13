@@ -1,0 +1,43 @@
+html {
+  scroll-behavior: smooth;
+}
+
+:root{
+  --primFontColor: #f9f9f9;
+  --mainBgColor: #040714;
+}
+* {
+  block-size: border-box;
+}
+
+body {
+  background-color: var(--mainBgColor);
+  color: var(--primFontColor);
+
+  font-family: Avenir-Roman, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--primFontColor);
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+      font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+  body {
+      font-size: .75rem;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  body {
+      font-size: .5rem;
+  }
+}
