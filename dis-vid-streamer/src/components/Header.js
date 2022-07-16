@@ -1,11 +1,76 @@
 import styled from "styled-components";
+import { auth, provider } from "../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import {  useNavigate } from "react-router-dom";
+import { signInWithPopup, signOut } from "firebase/auth";
+import { selectUserName, selectUserEmail, selectUserPhoto, setUserLoginDeatils} from "../features/user/userSlice"
 
 const Header = (props) => {
+    const dispatch = useDispatch();
+    const history = useNavigate();
+    const userName = useSelector(selectUserName);
+    const userPhoto = useSelector(selectUserPhoto);
+    const setUser = (user) => {
+        dispatch(
+            setUserLoginDeatils({
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL,
+            })
+        );
+    };
+
+    const handleAuth = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                console.log(result.user);
+                setUser(result.user);
+            })
+            .catch((error) => {
+                alert(error.message);
+            })
+            
+            // .then((result) => {
+            //     // This gives you a Google Access Token. You can use it to access the Google API.
+            //     const credential = GoogleAuthProvider.credentialFromResult(result);
+            //     const token = credential.accessToken;
+            //     // The signed-in user info.
+            //     const user = result.user;
+
+            // }).catch((error) => {
+            //     // Handle Errors here.
+            //     const errorCode = error.code;
+            //     const errorMessage = error.message;
+            //     // The email of the user's account used.
+            //     const email = error.customData.email;
+            //     // The AuthCredential type that was used.
+            //     const credential = GoogleAuthProvider.credentialFromError(error);
+            // });
+            
+            // signOut(auth)
+            // .then(() => {
+            //     // Sign-out successful.
+            // }).catch((error) => {
+            //     // An error happened.
+            //    console.log(error); 
+            // });        
+            // .then((result) => {
+            //     console.log(result);
+            // })
+            // .catch((error) => {
+            //     alert(error.message);
+            // });
+    };
+
+
     return (
         <Nav>
             <Logo>
                 <img src='./images/logo.svg' alt='Disney+' />
             </Logo>
+            {!userName ? <Login onClick={handleAuth}>Login</Login> 
+            : 
+            <>
             <NavMenu>
                 <a href='/home'>
                     <img src='./images/home-icon.svg' alt='Home' />
@@ -32,7 +97,9 @@ const Header = (props) => {
                     <span>series</span>
                 </a>
             </NavMenu>
-            <Login>Login</Login>
+            <UserImg src={userPhoto} />
+            </>
+            }
         </Nav>
     )
 }
@@ -154,6 +221,15 @@ const Login = styled.a`
         color: #000;
         border-color: transparent;
     }
+    &:focus {
+        background-color: #f9f9f9;
+        color: #000;
+        border-color: transparent;
+    }
+`;
+
+const UserImg = styled.img`
+    height: 100%;
 `;
 
 export default Header;

@@ -85,7 +85,7 @@ const SignUp = styled.a`
     &:hover {
         background-color: #0483ee;
     }
-    &:focus {
+    &:active {
         background-color: #0483ee;
     }
 `;
